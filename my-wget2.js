@@ -5,3 +5,18 @@ grâce à la fonction fsPromises.stat qui retourne un objet Stats qui contient c
 grâce à la propriété headers['content-length'] de l'objet "response" retourné par axios.get.
 Un console.log(response.headers) peut vous aider à comprendre la structure du header d'une réponse http. */
 
+const axios = require('axios')
+const fsPromises = require('fs/promises')
+
+const writeUrl = async () => {
+  try {
+  const response = await axios.get('https://fr.wikipedia.org/wiki/Blockchain')
+  const stats = await fsPromises.stat('blockchain.html')
+  await fsPromises.writeFile('blockchain.html', response.data) // response.data est une string qui est la page html
+  console.log(stats)
+  } catch (e) {
+    console.log(e.message)
+  }
+}
+
+writeUrl()

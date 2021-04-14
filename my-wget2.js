@@ -9,17 +9,17 @@ const axios = require('axios')
 const fsPromises = require('fs/promises')
 
 if (process.argv.length !== 3) {
-  console.log(`Usage: node my-wget.js url)`)
+  console.log(`Usage: node my-wget2.js url)`)
   process.exit(1)
 }
 
 const writeUrl = async () => {
   try {
   const response = await axios.get(process.argv[2])
-  const stats = await fsPromises.stat('index.html')
   await fsPromises.writeFile('index.html', response.data) // response.data est une string qui est la page html
-  console.log(stats.size)
-  console.log(response.headers)
+  const stats = await fsPromises.stat('index.html')
+  console.log(`Download file completed.\n file size ${stats.size} bytes`)
+  console.log(`Download file completed.\n file size ${response.headers['content-length']} bytes`)
   } catch (e) {
     console.log(e.message)
   }

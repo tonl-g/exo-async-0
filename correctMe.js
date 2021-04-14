@@ -11,6 +11,7 @@ try {
 } */
 
 const fsPromises = require('fs/promises')
+
 const myReadFile = async () => {
 try {
   const p1 = fsPromises.readFile('hello.txt', 'utf-8')

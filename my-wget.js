@@ -4,10 +4,15 @@ Il faudra utiliser le package axios et des fonctions du module fs/promises pour 
 const axios = require('axios')
 const fsPromises = require('fs/promises')
 
+if (process.argv.length !== 3) {
+  console.log(`Usage: N\node my-wget.js url)`)
+  process.exit(1)
+}
+
 const writeUrl = async () => {
   try {
-  const response = await axios.get('https://fr.wikipedia.org/wiki/Blockchain')
-  await fsPromises.writeFile('blockchain.html', response.data) // response.data est une string qui est la page html
+  const response = await axios.get(process.argv[2])
+  await fsPromises.writeFile('index.html', response.data) // response.data est une string qui est la page html
   } catch (e) {
     console.log(e.message)
   }

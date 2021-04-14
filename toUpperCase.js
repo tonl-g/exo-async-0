@@ -10,6 +10,7 @@ try {
 } */
 
 // const fs = require('fs')
+
 const fsPromises = require('fs/promises')
 
 const myReadAndWriteFile = async () => {
